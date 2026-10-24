@@ -1,0 +1,146 @@
+<Page
+    x:Class="AudioOrb.Pages.GeneralPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:AudioOrb.Controls"
+    Background="Transparent">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollMode="Disabled"
+                  HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Padding="36,22,48,48" Spacing="0">
+            <TextBlock Text="常规"
+                       FontSize="28"
+                       FontWeight="SemiBold" />
+            <TextBlock Text="控制启动方式、显示行为和交互反馈。"
+                       Margin="0,4,0,20"
+                       FontSize="13"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+
+            <InfoBar x:Name="StatusInfoBar"
+                     IsOpen="False"
+                     IsClosable="True"
+                     Margin="0,0,0,12" />
+
+            <TextBlock Text="操作方式"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       Margin="0,4,0,8" />
+
+            <controls:SettingsCard x:Name="OperationCard"
+                                   Title="桌面组件操作"
+                                   Description="单击：切换设备 · 滚轮：调整系统音量 · 右键：打开菜单 · 拖动：移动组件"
+                                   Glyph="&#xE946;" />
+
+            <controls:SettingsCard Title="鼠标滚轮"
+                                   Description="选择滚动组件时执行的动作；调整音量时会切换为音量视图。"
+                                   Glyph="&#xE7F4;">
+                <controls:SettingsCard.CardContent>
+                    <ComboBox x:Name="WheelPicker"
+                              Width="180"
+                              SelectionChanged="WheelPicker_SelectionChanged">
+                        <ComboBoxItem Content="调整系统音量" Tag="Volume" />
+                        <ComboBoxItem Content="切换输出设备" Tag="SwitchDevice" />
+                    </ComboBox>
+                </controls:SettingsCard.CardContent>
+            </controls:SettingsCard>
+
+            <TextBlock Text="启动与显示"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       Margin="0,20,0,8" />
+
+            <controls:SettingsCard Title="开机启动"
+                                   Description="登录 Windows 后自动运行，不显示设置窗口。"
+                                   Glyph="&#xE8A7;">
+                <controls:SettingsCard.CardContent>
+                    <Grid HorizontalAlignment="Right" Margin="0,0,-112,0">
+                        <ToggleSwitch x:Name="StartupToggle"
+                                      Width="52"
+                                      HorizontalAlignment="Right"
+                                      OnContent=""
+                                      OffContent=""
+                                      Toggled="StartupToggle_Toggled" />
+                    </Grid>
+                </controls:SettingsCard.CardContent>
+            </controls:SettingsCard>
+
+            <controls:SettingsCard Title="系统托盘"
+                                   Description="在任务栏通知区域显示图标；右键可切换设备、打开设置、隐藏组件或退出。"
+                                   Glyph="&#xE8A7;">
+                <controls:SettingsCard.CardContent>
+                    <Grid HorizontalAlignment="Right" Margin="0,0,-112,0">
+                        <ToggleSwitch x:Name="TrayToggle"
+                                      Width="52"
+                                      HorizontalAlignment="Right"
+                                      OnContent=""
+                                      OffContent=""
+                                      Toggled="TrayToggle_Toggled" />
+                    </Grid>
+                </controls:SettingsCard.CardContent>
+            </controls:SettingsCard>
+
+            <controls:SettingsCard Title="桌面组件模式"
+                                   Description="组件位于桌面层；普通应用会覆盖它，按 Win+D 显示桌面时出现，不会盖住游戏。"
+                                   Glyph="&#xE7F4;" />
+
+            <controls:SettingsCard Title="全屏时自动隐藏"
+                                   Description="检测到全屏应用时隐藏桌面组件，返回桌面后自动出现。"
+                                   Glyph="&#xE740;">
+                <controls:SettingsCard.CardContent>
+                    <Grid HorizontalAlignment="Right" Margin="0,0,-112,0">
+                        <ToggleSwitch x:Name="FullscreenToggle"
+                                      Width="52"
+                                      HorizontalAlignment="Right"
+                                      OnContent=""
+                                      OffContent=""
+                                      Toggled="FullscreenToggle_Toggled" />
+                    </Grid>
+                </controls:SettingsCard.CardContent>
+            </controls:SettingsCard>
+
+            <controls:SettingsCard Title="界面动效"
+                                   Description="切换时的淡入与轻微位移动画。关闭后可进一步降低资源占用。"
+                                   Glyph="&#xE7F4;">
+                <controls:SettingsCard.CardContent>
+                    <Grid HorizontalAlignment="Right" Margin="0,0,-112,0">
+                        <ToggleSwitch x:Name="AnimationToggle"
+                                      Width="52"
+                                      HorizontalAlignment="Right"
+                                      OnContent=""
+                                      OffContent=""
+                                      Toggled="AnimationToggle_Toggled" />
+                    </Grid>
+                </controls:SettingsCard.CardContent>
+            </controls:SettingsCard>
+
+            <TextBlock Text="位置与系统"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       Margin="0,20,0,8" />
+
+            <controls:SettingsCard Title="桌面组件位置"
+                                   Description="移动桌面组件后会自动吸附到屏幕边缘。"
+                                   Glyph="&#xE707;">
+                <controls:SettingsCard.CardContent>
+                    <Button Content="重置位置"
+                            Click="ResetPosition_Click" />
+                </controls:SettingsCard.CardContent>
+            </controls:SettingsCard>
+
+            <controls:SettingsCard Title="Windows 声音设置"
+                                   Description="管理输出设备、音量和空间音效。"
+                                   Glyph="&#xE767;">
+                <controls:SettingsCard.CardContent>
+                    <Button Content="打开"
+                            Click="OpenSoundSettings_Click" />
+                </controls:SettingsCard.CardContent>
+            </controls:SettingsCard>
+
+            <TextBlock Text="所有更改会立即生效并自动保存。"
+                       Margin="0,18,0,0"
+                       FontSize="12"
+                       Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

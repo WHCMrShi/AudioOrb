@@ -1,0 +1,24 @@
+# Build output
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+
+# Local publish and screenshots
+dist/
+artifacts/
+
+# Logs and local tooling
+*.log
+*.zip
+__pycache__/
+.vscode/ipch/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# User settings (never part of the repo)
+settings.json
